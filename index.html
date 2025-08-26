@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HomeCare — Professional Home Services</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --p1:#D9A299; /* muted rose */
+      --p2:#DCC5B2; /* beige-pink */
+      --p3:#F0E4D3; /* pale cream */
+      --p4:#FAF7F3; /* off-white */
+      --accent:#b76a63;
+      --muted:#7b6a67;
+      --card-shadow: 0 8px 24px rgba(108,87,84,0.08);
+      --glass: rgba(255,255,255,0.6);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
+      background: linear-gradient(180deg,var(--p4) 0%, #fff 100%);
+      color:#3b3433;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* container */
+    .container{max-width:1150px;margin:48px auto;padding:0 20px}
+
+    /* header */
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:60px;height:60px;border-radius:12px;background:linear-gradient(135deg,var(--p1),var(--p2));
+      display:grid;place-items:center;color:white;font-weight:700;font-size:18px;box-shadow:var(--card-shadow)
+    }
+    nav{display:flex;gap:18px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600}
+    nav a.primary{background:var(--p1);color:white;padding:10px 14px;border-radius:10px}
+
+    /* hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:center;margin-top:18px}
+    .hero-left h1{font-size:36px;margin:0 0 12px}
+    .lead{color:var(--muted);margin-bottom:18px}
+    .cta-row{display:flex;gap:12px}
+    .btn{padding:12px 16px;border-radius:12px;border:none;cursor:pointer;font-weight:700}
+    .btn-primary{background:var(--p1);color:white}
+    .btn-outline{background:transparent;border:2px solid var(--p2);color:var(--muted)}
+
+    .search-card{background:linear-gradient(180deg,var(--p3),rgba(255,255,255,0.6));padding:18px;border-radius:14px;box-shadow:var(--card-shadow)}
+    .search-row{display:flex;gap:12px}
+    .search-row input, .search-row select{flex:1;padding:12px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);font-weight:600}
+    .search-row button{padding:12px 14px;border-radius:10px;border:none;background:var(--accent);color:white}
+
+    /* services */
+    .section{margin-top:46px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:var(--p4);padding:18px;border-radius:14px;box-shadow:var(--card-shadow);border:1px solid rgba(0,0,0,0.03)}
+    .card h3{margin:8px 0 6px}
+    .service-ico{width:52px;height:52px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--p2),var(--p3));font-weight:700}
+
+    /* reviews */
+    .reviews-wrap{display:grid;grid-template-columns:1fr 420px;gap:20px;align-items:start}
+    .testimonial{background:linear-gradient(180deg,#fff, var(--p4));padding:18px;border-radius:14px;position:relative;overflow:hidden}
+
+    /* simple css carousel using radio inputs */
+    .carousel{background:var(--p4);padding:14px;border-radius:12px}
+    .slides{position:relative;height:150px}
+    .slides > input{display:none}
+    .slide{position:absolute;inset:0;opacity:0;transform:translateY(8px);transition:all .5s ease}
+    .slides input:checked + .slide{opacity:1;transform:none}
+    .dots{display:flex;gap:6px;justify-content:center;margin-top:12px}
+    .dot{width:10px;height:10px;border-radius:99px;background:rgba(0,0,0,0.12);cursor:pointer}
+    .slides input#s1:checked ~ .dots label[for="s1"],
+    .slides input#s2:checked ~ .dots label[for="s2"],
+    .slides input#s3:checked ~ .dots label[for="s3"]{background:var(--p1)}
+
+    .rating{display:flex;gap:4px;align-items:center}
+
+    /* address & contact */
+    .contact-card{display:flex;flex-direction:column;gap:10px;padding:18px;border-radius:12px;background:linear-gradient(180deg,var(--p4),#fff);box-shadow:var(--card-shadow)}
+
+    footer{margin:46px 0 80px;display:flex;justify-content:space-between;align-items:center;color:var(--muted)}
+
+    /* small screens */
+    @media (max-width:980px){
+      .hero, .reviews-wrap{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .slides{height:180px}
+    }
+    @media (max-width:560px){
+      .grid{grid-template-columns:1fr}
+      .logo{width:50px;height:50px}
+      .hero-left h1{font-size:24px}
+    }
+
+    /* utility */
+    .muted{color:var(--muted)}
+    .flex{display:flex}
+    .center{align-items:center}
+    .space-between{justify-content:space-between}
+
+    /* subtle hover */
+    .card:hover{transform:translateY(-6px);transition:transform .25s}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">HC</div>
+        <div>
+          <div style="font-weight:700">HomeCare</div>
+          <div class="muted" style="font-size:13px">Reliable home services near you</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+        <a class="primary" href="#book">Book Now</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-left">
+          <h1>Trusted home services — fast & professional</h1>
+          <p class="lead">Plumbers, electricians, carpenters, cleaners and more. Verified professionals, transparent pricing, and real customer reviews.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#book">Get a Quote</a>
+            <a class="btn btn-outline" href="#services">Explore Services</a>
+          </div>
+
+          <div style="margin-top:20px" class="search-card">
+            <form class="search-row" action="#" onsubmit="return false">
+              <select aria-label="service">
+                <option>Choose service (e.g. Plumber)</option>
+                <option>Plumber</option>
+                <option>Electrician</option>
+                <option>Carpenter</option>
+                <option>House Cleaner</option>
+              </select>
+              <input type="text" placeholder="Your area or address" />
+              <button type="submit">Find</button>
+            </form>
+            <div style="margin-top:12px;font-size:13px" class="muted">Shown prices include service fee. Professionals are background-checked.</div>
+          </div>
+        </div>
+
+        <aside>
+          <div class="contact-card" id="book">
+            <div style="font-weight:700">Quick Book</div>
+            <div class="muted" style="font-size:13px">Enter details and we'll match a pro within 24 hours.</div>
+            <input style="padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06)" placeholder="Full name" />
+            <input style="padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06)" placeholder="Phone or WhatsApp" />
+            <select style="padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06)">
+              <option>Select service</option>
+              <option>Plumber</option>
+              <option>Electrician</option>
+            </select>
+            <a class="btn btn-primary" href="#contact">Request</a>
+          </div>
+        </aside>
+      </section>
+
+      <section id="services" class="section">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <h2>Our Services</h2>
+          <div class="muted">Top-rated pros in your city</div>
+        </div>
+        <div class="grid" style="margin-top:16px">
+          <div class="card">
+            <div class="flex center space-between">
+              <div class="service-ico">P</div>
+              <div class="muted">from <strong>Rs. 600</strong></div>
+            </div>
+            <h3>Plumbing & Repairs</h3>
+            <p class="muted" style="font-size:14px">Leak fixes, installations, drain clearing — same-day appointments available.</p>
+          </div>
+
+          <div class="card">
+            <div class="flex center space-between">
+              <div class="service-ico">E</div>
+              <div class="muted">from <strong>Rs. 700</strong></div>
+            </div>
+            <h3>Electrical</h3>
+            <p class="muted" style="font-size:14px">Wiring, points, light fixtures, and safety inspections by licensed electricians.</p>
+          </div>
+
+          <div class="card">
+            <div class="flex center space-between">
+              <div class="service-ico">C</div>
+              <div class="muted">from <strong>Rs. 500</strong></div>
+            </div>
+            <h3>Carpentry</h3>
+            <p class="muted" style="font-size:14px">Furniture repairs, custom cabinets, door & window adjustments.</p>
+          </div>
+
+          <div class="card">
+            <div class="flex center space-between">
+              <div class="service-ico">H</div>
+              <div class="muted">from <strong>Rs. 400</strong></div>
+            </div>
+            <h3>House Cleaning</h3>
+            <p class="muted" style="font-size:14px">One-time deep clean or regular housekeeping packages.</p>
+          </div>
+
+          <div class="card">
+            <div class="flex center space-between">
+              <div class="service-ico">A</div>
+              <div class="muted">from <strong>Rs. 1200</strong></div>
+            </div>
+            <h3>Appliance Repair</h3>
+            <p class="muted" style="font-size:14px">Fridge, washing machine, AC — diagnosis & repair with warranty.</p>
+          </div>
+
+          <div class="card">
+            <div class="flex center space-between">
+              <div class="service-ico">M</div>
+              <div class="muted">from <strong>Rs. 300</strong></div>
+            </div>
+            <h3>Misc & Handyman</h3>
+            <p class="muted" style="font-size:14px">Small jobs, mounting, painting touch-ups and more.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="reviews" class="section">
+        <div style="display:flex;gap:20px;align-items:flex-start">
+          <div style="flex:1">
+            <h2>Customer Reviews</h2>
+            <p class="muted">Real feedback from customers who booked through HomeCare.</p>
+
+            <div class="carousel" style="margin-top:12px">
+              <div class="slides">
+                <input type="radio" name="r" id="s1" checked>
+                <div class="slide testimonial">
+                  <div class="flex space-between">
+                    <div>
+                      <strong>Ali R.</strong>
+                      <div class="rating" style="margin-top:8px">★★★★★ <span class="muted" style="margin-left:8px">5.0</span></div>
+                    </div>
+                    <div class="muted">Plumber — Lahore</div>
+                  </div>
+                  <p class="muted" style="margin-top:12px">"Fixed my kitchen leak within 2 hours. Professional, clean and fair price. Will use again."</p>
+                </div>
+
+                <input type="radio" name="r" id="s2">
+                <div class="slide testimonial">
+                  <div class="flex space-between">
+                    <div><strong>Sana K.</strong>
+                      <div class="rating" style="margin-top:8px">★★★★☆ <span class="muted" style="margin-left:8px">4.2</span></div>
+                    </div>
+                    <div class="muted">Electrician — Karachi</div>
+                  </div>
+                  <p class="muted" style="margin-top:12px">"Timely and polite electrician. Installation was neat and tested. Good value."</p>
+                </div>
+
+                <input type="radio" name="r" id="s3">
+                <div class="slide testimonial">
+                  <div class="flex space-between">
+                    <div><strong>Fatima Z.</strong>
+                      <div class="rating" style="margin-top:8px">★★★★★ <span class="muted" style="margin-left:8px">5.0</span></div>
+                    </div>
+                    <div class="muted">Cleaner — Islamabad</div>
+                  </div>
+                  <p class="muted" style="margin-top:12px">"Deep clean was amazing. Team arrived on time and left the house sparkling."</p>
+                </div>
+
+                <div class="dots">
+                  <label for="s1" class="dot"></label>
+                  <label for="s2" class="dot"></label>
+                  <label for="s3" class="dot"></label>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top:18px" class="muted">Average rating: <strong>4.7/5</strong> — based on 1,234 reviews</div>
+
+            <div style="margin-top:18px;display:flex;gap:12px;align-items:center">
+              <a class="btn btn-outline" href="#add-review">Write a review</a>
+              <a class="btn" style="background:transparent;border:2px dashed rgba(0,0,0,0.06);">See all reviews</a>
+            </div>
+          </div>
+
+          <aside style="width:380px">
+            <div class="card">
+              <h3>Business Details</h3>
+              <div class="muted" style="font-size:14px;margin-top:8px">HomeCare Services Pvt. Ltd.</div>
+              <div style="margin-top:8px" class="muted">Address: 45 Market Road, Gulberg</div>
+              <div class="muted">Phone: +92 300 1234567</div>
+              <div style="margin-top:8px;font-size:13px">Hours: Mon–Sat 8:00 — 18:00</div>
+              <div style="margin-top:12px" class="muted">Verified professionals • Service warranty • Secure payments</div>
+            </div>
+            
+            <div class="card" style="margin-top:12px">
+              <h3>Top-rated Pros</h3>
+              <div style="display:flex;gap:10px;margin-top:10px">
+                <div style="flex:1">
+                  <div style="font-weight:700">Umar</div>
+                  <div class="muted" style="font-size:13px">Plumber — 4.9</div>
+                </div>
+                <div style="flex:1">
+                  <div style="font-weight:700">Shaheen</div>
+                  <div class="muted" style="font-size:13px">Electrician — 4.8</div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <h2>Contact & Reviews</h2>
+        <div style="display:grid;grid-template-columns:1fr 380px;gap:20px;margin-top:12px">
+          <div>
+            <div class="card">
+              <h3 id="add-review">Add a review</h3>
+              <div class="muted" style="font-size:13px;margin-top:8px">Tell others about your experience.</div>
+              <input style="margin-top:12px;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06)" placeholder="Your name" />
+              <textarea style="margin-top:8px;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);min-height:100px" placeholder="Your review"></textarea>
+              <div style="display:flex;gap:8px;margin-top:8px;align-items:center">
+                <label class="muted">Rating:</label>
+                <div class="rating">★★★★★</div>
+              </div>
+              <div style="margin-top:12px"><a class="btn btn-primary">Submit review</a></div>
+            </div>
+
+            <div style="margin-top:14px" class="card">
+              <h3>Frequently Asked Questions</h3>
+              <details style="margin-top:8px"><summary>How soon can a pro arrive?</summary><div class="muted" style="margin-top:6px">Usually within 2–24 hours depending on availability.</div></details>
+              <details style="margin-top:8px"><summary>Is payment secure?</summary><div class="muted" style="margin-top:6px">Yes — we use secure payment gateways and offer cash-on-service.</div></details>
+            </div>
+          </div>
+
+          <aside>
+            <div class="card">
+              <h3>Office & Address</h3>
+              <div class="muted" style="margin-top:8px">45 Market Road, Gulberg • Lahore, Pakistan</div>
+              <div style="margin-top:8px" class="muted">Email: support@homecare.com</div>
+              <div style="margin-top:12px">
+                <a class="btn btn-outline" href="#">Get directions</a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>© 2025 HomeCare</div>
+      <div class="muted">Made with ❤️ · Terms · Privacy</div>
+    </footer>
+
+  </div>
+</body>
+</html>
+
+
